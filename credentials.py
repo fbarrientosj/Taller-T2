@@ -1,1 +1,1 @@
-pageName = 'http://localhost:5000'
+pageName = 'https://taller-t2api.herokuapp.com'

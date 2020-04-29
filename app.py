@@ -288,22 +288,25 @@ def add_ingredient_to_hamburguer(idHamburguer, idIngredient):
 
 @app.route('/hamburguesa/<idHamburguer>/ingrediente/<idIngredient>', methods=['DELETE'])
 def delete_ingredient_to_hamburguer(idHamburguer, idIngredient):
-  hamburguer = Hamburguer.query.get(idHamburguer)
-  ingredient = Ingredient.query.get(idIngredient)
-  if not hamburguer:
-    return Response('Id de hamburguesa inválido', status=400)
+  try:
+    hamburguer = Hamburguer.query.get(idHamburguer)
+    ingredient = Ingredient.query.get(idIngredient)
+    if not hamburguer:
+      return Response('Id de hamburguesa inválido', status=400)
 
-  if not ingredient:
-    return Response('Ingrediente inexistente', status=404)
+    if not ingredient:
+      return Response('Ingrediente inexistente', status=404)
 
-  #db.session.query(matchs).filter(idIngredient == ingredient.idIngredient, idHamburguer == hamburguer.idHamburguer).delete()
-  #db.session.commit()
-  effected_rows = hamburguer.ing.remove(ingredient)
-  if effected_rows:
+    #db.session.query(matchs).filter(idIngredient == ingredient.idIngredient, idHamburguer == hamburguer.idHamburguer).delete()
+    #db.session.commit()
+    effected_rows = hamburguer.ing.remove(ingredient)
     db.session.commit()
+
     return Response(f'Ingrediente: {ingredient.name} se ha eliminado en hamburguesa: {hamburguer.name}', status=201)
-  else:
-    return Response(f'Ingrediente: {ingredient.name} no existe en la hamburguesa: {hamburguer.name}', status=404)
+    
+    
+  except:
+    return Response(f'Id ingrediente inexistente en la hamburguesa', status=404)
 
 @app.route('/middle', methods=['GET'])
 def get_middle():
