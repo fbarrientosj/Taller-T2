@@ -10,7 +10,7 @@ flask = "*"
 flask-sqlalchemy = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
-json = '*'
+gunicorn = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
