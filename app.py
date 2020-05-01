@@ -126,7 +126,7 @@ def get_hamburguers():
 def get_hamburguer(id):
 
   try:
-    if id.isnumeric():
+    if str(id).isnumeric():
       hamburguer = Hamburguer.query.get(id)
       respons = response('hamburguer', hamburguer)
       return jsonify(respons)
@@ -140,7 +140,7 @@ def get_hamburguer(id):
 @app.route('/hamburguesa/<id>', methods=['PATCH'])
 def update_hamburguer(id):
 
-  if not(verifyRequest('updateHamburguer', request)) or not id.isnumeric():
+  if not(verifyRequest('updateHamburguer', request)) or not str(id).isnumeric():
     return Response('Parametros invalidos', status=400)
 
   try:
@@ -216,7 +216,7 @@ def get_ingredients():
 @app.route('/ingrediente/<id>', methods=['GET'])
 def get_ingredient(id):
 
-  if not(id.isnumeric()):
+  if not(str(id).isnumeric()):
     return Response('id invalido', status=400)
 
   try:
@@ -231,7 +231,7 @@ def get_ingredient(id):
 # Update a ingredient
 @app.route('/ingrediente/<id>', methods=['PATCH'])
 def update_ingredient(id):
-  if not(id.isnumeric()):
+  if not(str(id).isnumeric()):
     return Response('id invalido', status=400)
 
   ingredient = Ingredient.query.get(id)

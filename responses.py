@@ -41,7 +41,7 @@ def verifyRequest(what, request):
 
     if what == 'updateHamburguer':
         if 'precio' in request.json.keys():
-            if not (request.json['precio'].isnumeric()):
+            if not (str(request.json['precio']).isnumeric()):
                 return False
         
         return True
