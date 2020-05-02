@@ -141,37 +141,33 @@ def get_hamburguer(id):
 def update_hamburguer(id):
 
   if not(verifyRequest('updateHamburguer', request)) or not str(id).isnumeric():
+    print('hola...')
     return Response('Parametros invalidos', status=400)
 
   try:
+    print('hola')
     hamburguer = Hamburguer.query.get(id)
     if 'nombre' in request.json.keys():
         name = request.json['nombre']
         hamburguer.name = name
     
-    else:
-      return Response('Parametros invalidos', status=400)
     
     if 'descripcion' in request.json.keys():
         description = request.json['descripcion']
         hamburguer.description = description
     
-    else:
-      return Response('Parametros invalidos', status=400)
 
     if 'precio' in request.json.keys():
         price = request.json['precio']
-        hamburguer.price = price
 
-    else:
-      return Response('Parametros invalidos', status=400)
+        if not(str(price).isnumeric()):
+          return Response('Parametros invalidos', status=400)
+        hamburguer.price = price
+      
 
     if 'imagen' in request.json.keys():
         image = request.json['imagen']
         hamburguer.image = image
-
-    else:
-      return Response('Parametros invalidos', status=400)
 
     db.session.commit()
     respons = response('hamburguer', hamburguer)
