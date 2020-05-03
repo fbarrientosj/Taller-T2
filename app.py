@@ -186,7 +186,7 @@ def delete_hamburguer(id):
     db.session.delete(hamburguer)
     db.session.commit()
 
-    return hamburguer_schema.jsonify(hamburguer)
+    return response('hamburguer', hamburguer)
   except:
     return Response('Hamburguesa inexistente', status=404)
 
@@ -217,8 +217,10 @@ def add_Ingredient():
 @app.route('/ingrediente', methods=['GET'])
 def get_ingredients():
   all_products = Ingredient.query.all()
-  result = ingredients_schema.dump(all_products)
-  return jsonify(result)
+  #result = ingredients_schema.dump(all_products)
+
+
+  return response('ingredients', all_products)
 
 # Get Single ingredient
 @app.route('/ingrediente/<id>', methods=['GET'])
@@ -232,7 +234,7 @@ def get_ingredient(id):
     if not ingredient:
       return Response('ingrediente inexistente', status=404)
 
-    return ingredient_schema.jsonify(ingredient)
+    return response('ingredient',ingredient)
   except:
     return Response('ingrediente inexistente', status=404)
 
@@ -256,7 +258,7 @@ def update_ingredient(id):
       ingredient.description = description
 
   db.session.commit()
-  return ingredient_schema.jsonify(ingredient)
+  return response('ingredient', ingredient)
 
 # Delete Ingredient
 @app.route('/ingrediente/<id>', methods=['DELETE'])
@@ -273,7 +275,7 @@ def delete_ingredient(id):
   db.session.delete(ingredient)
   db.session.commit()
 
-  return ingredient_schema.jsonify(ingredient)
+  return response('ingredient', ingredient)
 
 #  <------------------------------------------ END INGREDIENT'S METHODS ------------------------------------------>
 

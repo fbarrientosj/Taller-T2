@@ -35,6 +35,16 @@ def response(what, Object):
         response['descripcion'] = Object.description 
         return response
 
+    elif what == 'ingredients':
+        response = []
+        for ingrediente in Object:
+            respon = {}
+            respon['id'] = Object.ingredient_id
+            respon['nombre'] = Object.name
+            respon['descripcion'] = Object.description 
+            response.append(respon)
+        return response
+
 
 
 def verifyRequest(what, request):
