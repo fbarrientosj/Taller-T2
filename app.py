@@ -237,7 +237,7 @@ def get_ingredients():
   #result = ingredients_schema.dump(all_products)
 
 
-  return jsonify('ingredients', all_products)
+  return jsonify(response('ingredients', all_products))
 
 # Get Single ingredient
 @app.route('/ingrediente/<id>', methods=['GET'])
