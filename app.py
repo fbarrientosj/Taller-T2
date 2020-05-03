@@ -83,6 +83,20 @@ ingredients_schema = IngredientSchema(many=True)
 # Create a Hamburguer
 @app.route('/hamburguesa', methods=['POST'])
 def add_hamburguer():
+
+  copiaLlaves = list(request.json.keys())
+
+  if 'nombre' in copiaLlaves:
+    copiaLlaves.remove('nombre')
+  if 'descripcion' in copiaLlaves:
+    copiaLlaves.remove('descripcion')
+  if 'precio' in copiaLlaves:
+    copiaLlaves.remove('precio')
+  if 'imagen' in copiaLlaves:
+    copiaLlaves.remove('imagen')
+
+  if copiaLlaves:
+    return Response('Parametros inválidos', status=400)
   try: 
     name = request.json['nombre']
     description = request.json['descripcion']
@@ -141,7 +155,7 @@ def get_hamburguer(id):
 def update_hamburguer(id):
 
   if not(verifyRequest('updateHamburguer', request)) or not str(id).isnumeric():
-    print('hola...')
+
     return Response('Parametros invalidos', status=400)
 
   copiaLlaves = list(request.json.keys())
@@ -214,7 +228,15 @@ def delete_hamburguer(id):
 # Create a Ingredient
 @app.route('/ingrediente', methods=['POST'])
 def add_Ingredient():
+  copiaLlaves = list(request.json.keys())
 
+  if 'nombre' in copiaLlaves:
+    copiaLlaves.remove('nombre')
+  if 'descripcion' in copiaLlaves:
+    copiaLlaves.remove('descripcion')
+
+  if copiaLlaves:
+    return Response('Parametros inválidos', status=400)
   try:
     name = request.json['nombre']
     description = request.json['descripcion']
