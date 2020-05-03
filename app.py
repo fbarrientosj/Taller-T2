@@ -144,8 +144,21 @@ def update_hamburguer(id):
     print('hola...')
     return Response('Parametros invalidos', status=400)
 
+  copiaLlaves = list(request.json.keys())
+
+  if 'nombre' in copiaLlaves:
+    copiaLlaves.remove('nombre')
+  if 'descripcion' in copiaLlaves:
+    copiaLlaves.remove('descripcion')
+  if 'precio' in copiaLlaves:
+    copiaLlaves.remove('precio')
+  if 'imagen' in copiaLlaves:
+    copiaLlaves.remove('imagen')
+
+  if copiaLlaves:
+    return Response('Parametros inválidos', status=400)
+
   try:
-    print('hola')
     hamburguer = Hamburguer.query.get(id)
     if 'nombre' in request.json.keys():
         name = request.json['nombre']
@@ -161,6 +174,7 @@ def update_hamburguer(id):
         price = request.json['precio']
 
         if not(str(price).isnumeric()):
+          print('hola')
           return Response('Parametros invalidos', status=400)
         hamburguer.price = price
       
@@ -168,6 +182,9 @@ def update_hamburguer(id):
     if 'imagen' in request.json.keys():
         image = request.json['imagen']
         hamburguer.image = image
+
+    
+    
 
     db.session.commit()
     respons = response('hamburguer', hamburguer)
