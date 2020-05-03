@@ -8,7 +8,7 @@ def response(what, Object):
         response['nombre'] = Object.name
         response['precio'] = Object.price
         response['descripcion'] = Object.description 
-        response['image'] = Object.picture
+        response['imagen'] = Object.picture
         ingredients = [ing.ingredient_id for ing in Object.ing]
         response['ingredientes'] = [{'path' : pageName + '/ingrediente/' + str(ID)} for ID in ingredients]
         return response
@@ -22,7 +22,7 @@ def response(what, Object):
             response['nombre'] = hamburguer.name
             response['precio'] = hamburguer.price
             response['descripcion'] = hamburguer.description 
-            response['image'] = hamburguer.picture
+            response['imagen'] = hamburguer.picture
             ingredients = [ing.ingredient_id for ing in hamburguer.ing]
             response['ingredientes'] = [{'path' : pageName + '/ingrediente/' + str(ID)} for ID in ingredients]
             finalResponse.append(response)
