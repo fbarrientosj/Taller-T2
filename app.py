@@ -101,6 +101,8 @@ def add_hamburguer():
     name = request.json['nombre']
     description = request.json['descripcion']
     price = request.json['precio']
+    if not(str(price).isnumeric()):
+          return Response('Parametros invalidos', status=400)
     picture = request.json['imagen']
     #ingredients = request.json['ingredientes']
     
@@ -188,7 +190,6 @@ def update_hamburguer(id):
         price = request.json['precio']
 
         if not(str(price).isnumeric()):
-          print('hola')
           return Response('Parametros invalidos', status=400)
         hamburguer.price = price
       
