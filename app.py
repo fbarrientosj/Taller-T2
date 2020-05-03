@@ -312,7 +312,7 @@ def delete_ingredient_to_hamburguer(idHamburguer, idIngredient):
     effected_rows = hamburguer.ing.remove(ingredient)
     db.session.commit()
 
-    return Response(f'Ingrediente: {ingredient.name} se ha eliminado en hamburguesa: {hamburguer.name}', status=201)
+    return Response(f'Ingrediente: {ingredient.name} se ha eliminado en hamburguesa: {hamburguer.name}', status=200)
     
     
   except:
