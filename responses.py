@@ -39,9 +39,9 @@ def response(what, Object):
         response = []
         for ingrediente in Object:
             respon = {}
-            respon['id'] = Object.ingredient_id
-            respon['nombre'] = Object.name
-            respon['descripcion'] = Object.description 
+            respon['id'] = ingrediente.ingredient_id
+            respon['nombre'] = ingrediente.name
+            respon['descripcion'] = ingrediente.description 
             response.append(respon)
         return response
 
